@@ -1,0 +1,48 @@
+<mat-toolbar  style="padding-top:0;background-color:#301E80; color: rgb(255, 255, 255); flex:1 1 auto;">
+<!-- <mat-toolbar style="padding-top:0;background-color:rgb(196, 196, 196); color: #301E80"> -->
+  <span>Furlenco Music </span>
+  <span style="flex:1 1 auto;"></span>
+  <span style="flex:1 1 auto;"></span>
+  <span (click) = "logout()">SignOut</span>
+  <span></span>
+</mat-toolbar>
+<nav mat-tab-nav-bar style=" background-color:white;height:auto">
+  <span style="margin:0 auto;">
+    <a mat-tab-link [routerLink]="['/client', 'user','accounts']" routerLinkActive="activeTab" class="inActiveTab">
+      Add other accounts.
+    </a>
+  </span>
+</nav>
+<!-- <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="#">Navbar</a>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Features</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pricing</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+  </div>
+</nav> -->
+    <div class="jumbotron bg-secondary" id="jumbotron" style="padding-top:10px;color:#301E80;">
+      <div class="container-fluid container-fill-height">
+      </div>
+      <router-outlet></router-outlet>
+      <footer class="middle">
+        <i class="fa fa-copyright">Srijan Reddy</i>
+      </footer>
+    </div>

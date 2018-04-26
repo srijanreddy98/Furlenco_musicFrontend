@@ -1,0 +1,134 @@
+<div class="overlay" [style.display]="showRecords ? 'block' : 'none'">
+  <mat-card class="example-card" style="margin:auto auto;margin-top:5%;opacity:0.998;padding:2%">
+    <mat-card-title><img mat-card-avatar src="assets/images/details.png" alt="" class="circle">
+    {{selectedClass}}</mat-card-title>
+    <div style="margin:0 auto;">
+      <mat-button-toggle-group #group="matButtonToggleGroup" (change)="selectedToggleChange($event)">
+        <mat-button-toggle value="All" style="text-align:center">
+          All
+        </mat-button-toggle>
+        <mat-button-toggle value="P" style="text-align: center">
+          Present
+        </mat-button-toggle>
+        <mat-button-toggle value="A" style="text-align: center">
+          Absent
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+  </div>
+    <mat-card-content [style.overflow]="'auto'" [style.height.px]="'350'">
+      <ng-scrollbar>
+        <mat-list class="collection">
+          <!-- <mat-list-item class="collection-item avatar">
+            <span class="title" style="font-size:150%">Date</span>
+            <p style="font-size:120%;font-style:oblique">&emsp;Session No.
+              <br>
+              <span style="font-size:80%;font-style:italic">&emsp; In - Out</span>
+            </p>
+            <div style="position: absolute;top:2px; right:3px  ">
+          
+              <button mat-raised-button (click)="settle(in)">Report
+                <i class="material-icons">receipt</i>
+              </button>
+            </div>
+          </mat-list-item>
+          <mat-list-item *ngFor="let dat of selectedSub;let in = index" [ngClass]="{
+                        trgreen:dat.p_a === 'P',
+                        trred:dat.p_a === 'A'
+                    }">
+            <span class="title" style="font-size:150%">{{dat.date}}</span>
+            <p style="font-size:120%;font-style:oblique;">&emsp;{{dat.session_no}}
+              <br>
+              <span style="font-size:80%;font-style:italic">&emsp; {{dat.in}} - {{dat.out}}</span>
+            </p>
+            <div style="position: absolute;top:2px; right:3px  ">
+
+              <button mat-raised-button (click)="settle(in)">Report
+                <i class="material-icons">receipt</i>
+              </button>
+            </div>
+          </mat-list-item> -->
+<mat-list-item *ngFor="let dat of filteredRec;let in = index" [ngClass]="{
+                        trgreen:dat.p_a === 'P',
+                        trred:dat.p_a === 'A'
+                    }">
+
+            <h3 matLine> {{dat.date}} </h3>
+            <p matLine>
+              <span> {{dat.in}} </span>
+              <span class="demo-2"> -- {{dat.out}} </span>
+            </p>
+            {{dat.session_no}}
+            <mat-icon>folder</mat-icon>
+            <button mat-icon-button>
+              <img [src]="dat.p_a == 'P' ? '/assets/images/present.png' : '/assets/images/absent.png'" style="width:24px">
+            </button>
+            <button mat-icon-button (click)="remove(1)">
+              <i class="material-icons" id="report" style="color:rgb(138, 138, 0)">report_problem</i>
+            </button>
+        </mat-list-item>
+        </mat-list>
+      </ng-scrollbar>
+       <!-- <table >
+                  <thead>
+                    <tr>
+                      <th>Description</th>
+                      <th>Amount</th>
+                      <th>Time Added</th>
+                      <th>Date Added</th>
+                    </tr>
+                  </thead>     
+                  <tbody>
+                  <tr *ngFor = "let dat of selectedUser.record;let in = index" (click) = showExp(in) [ngClass]="{
+                      trgreen:dat.amt>0,
+                      trred:dat.amt<0
+                  }">
+                    <td>
+                      {{dat.description}}
+                    </td>
+                    <td>
+                      {{dat.amt}}
+                    </td>
+                    <td>
+                      {{dat.timeCreated | slice:11:19}}
+                    </td>
+                    <td>
+                      {{dat.timeCreated | slice:0:10}}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>  -->
+    </mat-card-content>
+    <mat-card-actions>
+      <i class="material-icons" style="font-size: 30px " (click)="showRecords = !showRecords">cancel</i>
+    </mat-card-actions>
+  </mat-card>
+</div>
+<!-- <div *ngIf="!loadingrec"> -->
+  <div class="example-container mat-elevation-z8" [style.display]="loading ? 'none' : 'block'"
+   [style.width.px] = "'400'" style="margin:0 auto">
+    <div class="example-container mat-elevation-z8" [style.display]="loading ? 'none' : 'block'">
+      <div class="example-header">
+        <div class="input-field">
+          <mat-form-field>
+          <input matInput id="email" type="email" (keyup)="applyFilterSubjects($event.target.value)" placeholder="Filter">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <ul class="collection" style="width:auto;" [style.opacity]="showHist?'0.2':'1'">
+      <div style="height:auto" [style.overflow]="'auto'" [style.height.px]="400">
+        <ng-scrollbar rebuild-on-resize>
+          <li class="collection-item avatar lig" *ngFor="let sub of filteredSubs; let i = index" (click)="showHistory(i)">
+            <img src="assets/images/subjects.png"  [style.height.px]="40" alt="" class="circle">
+            <span class="title res">{{sub.class}}</span>
+            <span class="res" style="font-size:15px;">
+              <br>
+              <span [style.color]="'green'" class="nowrap">{{sub.totalPresents }}</span>
+              <span [style.color]="'red'" class="nowrap">{{sub.totalAbsents}}</span>
+            </span>
+          </li>
+          <!-- <hr style="display:none"> -->
+        </ng-scrollbar>
+      </div>
+    </ul>
+  </div>

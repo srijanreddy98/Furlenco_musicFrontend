@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-lg-6">
+  <mat-list *ngIf = "!sel">
+    <h3 mat-subheader>Playlist <span style="position: absolute;right:0px;"><i class="material-icons" (click) = "shareAdd = !shareAdd">add</i>  <i class="material-icons" (click) = "openDialog()" >create_new_folder</i> </span></h3>
+    <mat-list-item *ngIf = "shareAdd">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Share Code" [(ngModel)]="shareCodeId">
+      </mat-form-field> <button mat-button color="primary" (click) = "AddPlaylist()"> Add </button>
+    </mat-list-item>
+    <mat-list-item *ngFor="let playlist of user.playlist; let in = index" >
+      <mat-icon mat-list-icon (click) = "ind = in; sel = !sel">folder</mat-icon>
+      <h4 mat-line (click) = "ind = in; sel = !sel" >{{playlist.name}}</h4>
+      <p mat-line (click) = "ind = in; sel = !sel"> <span style="font-size: 75%" *ngFor = "let tag of playlist.tags"> {{tag}}, </span></p>
+      <i class="material-icons" (click) = "share(playlist)">share</i>
+    </mat-list-item>
+  </mat-list>
+  <mat-list *ngIf = "sel">
+  <mat-divider></mat-divider>
+    <i class="material-icons" (click)="sel = !sel">arrow_back</i><h3 mat-subheader>Songs <span style="position: absolute;right:0px;">
+      <i class="material-icons">reorder</i>
+      <i class="material-icons" (click)="openDialogSong(ind)">create_new_folder</i>
+    </span></h3>
+    <mat-list-item *ngFor="let note of user.playlist[ind].songs" (click) = "play(note.url)">
+      <mat-icon mat-list-icon>note</mat-icon>
+      <h4 mat-line>{{note.name}}</h4>
+      <p mat-line> {{note.url}} </p>
+    </mat-list-item>
+  </mat-list>
+  </div>
+  <div class="col-lg-6">
+<video-player>
+</video-player>
+</div></div>
